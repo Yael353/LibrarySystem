@@ -10,10 +10,4 @@
     <ProjectReference Include="..\LibrarySystem.Domain\LibrarySystem.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Books\Queries\GetBooks\" />
-    <Folder Include="Loan\" />
-    <Folder Include="Members\" />
-  </ItemGroup>
-
 </Project>

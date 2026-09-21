@@ -23,12 +23,10 @@ namespace LibrarySystem.Domain.Entities
             Author = author;
             ISBN = isbn;
         }
-
         public static Book Create(string title, string author, ISBN isbn)
         {
             return new Book(title, author, isbn);
         }
-
         public void MarkAsBorrowed()
         {
             if (!IsAvailable)
@@ -36,7 +34,6 @@ namespace LibrarySystem.Domain.Entities
 
             IsAvailable = false;
         }
-
         public void MarkAsReturned()
         {
             if (IsAvailable)
@@ -45,8 +42,17 @@ namespace LibrarySystem.Domain.Entities
             IsAvailable = true;
         }
 
+        public void Update(string title, string author, ISBN isbn)
+        {
+            if (string.IsNullOrWhiteSpace(title))
+                throw new ArgumentException("Titel får inte vara tom", nameof(title));
+            if (string.IsNullOrWhiteSpace(author))
+                throw new ArgumentException("Författare får inte vara tom", nameof(author));
 
-
+            Title = title;
+            Author = author;
+            ISBN = isbn;
+        }
         public string GetDisplayInfo()
         {
             var status = IsAvailable ? "tillgänglig" : "utlånad";
