@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+  </Folder>
+  <Project Path="LibrarySystem.Api/LibrarySystem.Api.csproj" Id="99f93425-574f-41b2-ae56-e59917a3b4d9" />
+  <Project Path="LibrarySystem.Application/LibrarySystem.Application.csproj" />
+  <Project Path="LibrarySystem.Domain/LibrarySystem.Domain.csproj" />
+  <Project Path="LibrarySystem.Infrastructure/LibrarySystem.Infrastructure.csproj" />
+</Solution>
