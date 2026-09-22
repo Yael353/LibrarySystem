@@ -1,9 +1,7 @@
-
-using LibrarySystem.Domain.Entities;
-using LibrarySystem.Domain.ValueObjects;
+using LibrarySystem.Application;
+using LibrarySystem.Infrastructure;
 
 namespace LibrarySystem.Api
-
 {
     public class Program
     {
@@ -11,29 +9,37 @@ namespace LibrarySystem.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // ═══════════════════════════════════════════════════════════════
+            // APPLICATION
+            // ═══════════════════════════════════════════════════════════════
+            builder.Services.AddApplication();
 
+            // ═══════════════════════════════════════════════════════════════
+            // INFRASTRUCTURE
+            // ═══════════════════════════════════════════════════════════════
+            builder.Services.AddInfrastructure(builder.Configuration);
+
+            // ═══════════════════════════════════════════════════════════════
+            // API (Presentation)
+            // ═══════════════════════════════════════════════════════════════
             builder.Services.AddControllers();
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            // ═══════════════════════════════════════════════════════════════
+            // MIDDLEWARE PIPELINE
+            // ═══════════════════════════════════════════════════════════════
             if (app.Environment.IsDevelopment())
             {
-                app.MapOpenApi();
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
-
-
-
 
             app.Run();
         }
