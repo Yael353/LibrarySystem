@@ -25,6 +25,13 @@ namespace LibrarySystem.Domain.Entities
             return new Member(name, phoneNumber, email);
         }
 
+        public void Update(PersonName name, Email email, PhoneNumber phoneNumber)
+        {
+            Name = name;
+            Email = email;
+            PhoneNumber = phoneNumber;
+        }
+
         public void Deactivate()
         {
             IsActive = false;
