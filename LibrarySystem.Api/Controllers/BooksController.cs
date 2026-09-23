@@ -1,6 +1,5 @@
 ﻿using LibrarySystem.Application.DTOs;
 using LibrarySystem.Application.Interfaces.Services;
-using LibrarySystem.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibrarySystem.Api.Controllers
@@ -10,10 +9,12 @@ namespace LibrarySystem.Api.Controllers
     public class BooksController : ControllerBase
     {
         private readonly IBookService _bookService;
+        private readonly IOpenLibraryClient _openLibraryClient;
 
-        public BooksController( IBookService bookService)
+        public BooksController(IBookService bookService, IOpenLibraryClient openLibraryClient)
         {
             _bookService = bookService;
+            _openLibraryClient = openLibraryClient;
         }
 
         [HttpGet]
@@ -63,6 +64,16 @@ namespace LibrarySystem.Api.Controllers
         {
             await _bookService.DeleteAsync(id, cancellationToken);
             return NoContent();
+        }
+
+        [HttpGet("search")]
+        public async Task<ActionResult<List<OpenLibraryBookDto>>> Search([FromQuery] string query, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+                return BadRequest("Sökord krävs");
+
+            var result = await _openLibraryClient.SearchAsync(query, cancellationToken);
+            return Ok(result);
         }
     }
 

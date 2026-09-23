@@ -28,6 +28,10 @@ namespace LibrarySystem.Infrastructure.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("CoverUrl")
+                        .HasMaxLength(500)
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("ISBN")
                         .IsRequired()
                         .HasMaxLength(13)

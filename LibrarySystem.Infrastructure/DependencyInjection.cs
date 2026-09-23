@@ -1,4 +1,6 @@
 ﻿using LibrarySystem.Application.Interfaces.Repositories;
+using LibrarySystem.Application.Interfaces.Services;  
+using LibrarySystem.Infrastructure.ExternalServices.OpenLibrary;
 using LibrarySystem.Infrastructure.Persistence;
 using LibrarySystem.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +25,9 @@ namespace LibrarySystem.Infrastructure
             services.AddScoped<IMemberRepository, MemberRepository>();
             services.AddScoped<ILoanRepository, LoanRepository>();
             services.AddScoped<IReservationRepository, ReservationRepository>();
+
+            // Open Library-klienten
+            services.AddHttpClient<IOpenLibraryClient, OpenLibraryClient>();
 
             return services;
         }
