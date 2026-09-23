@@ -10,9 +10,10 @@ namespace LibrarySystem.Domain.Entities
         public ISBN ISBN { get; private set; }
         public bool IsAvailable { get; private set; } = true;
         public LoanPeriod LoanPeriod { get; private set; } = LoanPeriod.Standard();
+        public string? CoverUrl { get; private set; }
 
         private Book() { }
-        private Book(string title, string author, ISBN isbn) : base()
+        private Book(string title, string author, ISBN isbn, string? coverUrl) : base()
         {
             if (string.IsNullOrWhiteSpace(title))
                 throw new ArgumentException("Titel får inte vara tom", nameof(title));
@@ -22,12 +23,13 @@ namespace LibrarySystem.Domain.Entities
             Title = title;
             Author = author;
             ISBN = isbn;
+            CoverUrl = coverUrl;
         }
-        public static Book Create(string title, string author, ISBN isbn)
+        public static Book Create(string title, string author, ISBN isbn, string? coverUrl = null)
         {
-            return new Book(title, author, isbn);
+            return new Book(title, author, isbn, coverUrl);
         }
-        public void Update(string title, string author, ISBN isbn)
+        public void Update(string title, string author, ISBN isbn, string? coverUrl)
         {
             if (string.IsNullOrWhiteSpace(title))
                 throw new ArgumentException("Titel får inte vara tom", nameof(title));
@@ -37,6 +39,7 @@ namespace LibrarySystem.Domain.Entities
             Title = title;
             Author = author;
             ISBN = isbn;
+            CoverUrl = coverUrl;
         }
         public void MarkAsBorrowed()
         {

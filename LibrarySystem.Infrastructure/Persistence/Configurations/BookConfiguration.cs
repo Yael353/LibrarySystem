@@ -38,5 +38,8 @@ public class BookConfiguration : IEntityTypeConfiguration<Book>
                 .HasColumnName("LoanPeriodDays")
                 .IsRequired();
         });
+
+        builder.Property(b => b.CoverUrl)
+        .HasMaxLength(500);
     }
 }

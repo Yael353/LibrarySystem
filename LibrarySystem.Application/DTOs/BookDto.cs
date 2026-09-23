@@ -12,5 +12,7 @@ namespace LibrarySystem.Application.DTOs
         public string Author { get; set; } = string.Empty;
         public string ISBN { get; set; } = string.Empty;
         public bool IsAvailable { get; set; }
+
+        public string? CoverUrl { get; set; }
     }
 }

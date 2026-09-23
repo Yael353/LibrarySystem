@@ -39,6 +39,7 @@ namespace LibrarySystem.Api.Controllers
                 request.Title,
                 request.Author,
                 request.ISBN,
+                request.CoverUrl,
                 cancellationToken);
 
             return CreatedAtAction(nameof(GetById), new { id }, id);
@@ -51,7 +52,8 @@ namespace LibrarySystem.Api.Controllers
             [FromBody] UpdateBookRequest request,
             CancellationToken cancellationToken)
         {
-            await _bookService.UpdateAsync(id, request.Title, request.Author, request.ISBN, cancellationToken);
+            await _bookService.UpdateAsync(id, request.Title, request.Author, request.ISBN, request.CoverUrl, cancellationToken);
+
             return NoContent();
         }
 
@@ -67,5 +69,5 @@ namespace LibrarySystem.Api.Controllers
     
 }
 
-    public record CreateBookRequest(string Title, string Author, string ISBN);
-    public record UpdateBookRequest(string Title, string Author, string ISBN);
+    public record CreateBookRequest(string Title, string Author, string ISBN, string? CoverUrl);
+public record UpdateBookRequest(string Title, string Author, string ISBN, string? CoverUrl);
